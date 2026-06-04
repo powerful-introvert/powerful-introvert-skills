@@ -1,0 +1,44 @@
+Powerful Introvert — Skills for Introverted Technology Leaders
+Copyright 2026 Greg Weinger and contributors
+
+This product includes software and written guidance developed by
+Greg Weinger and project contributors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use these files except in compliance with the License.
+You may obtain a copy of the License in the LICENSE file in this
+repository or at:
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+------------------------------------------------------------------------
+ATTRIBUTION MODEL
+------------------------------------------------------------------------
+
+Authorship is declared per skill, not per repository. Each skill folder
+contains an AUTHORS file listing the people who created and maintain that
+specific skill. Where a skill is co-authored, all authors are listed.
+
+  - Solo-authored skills credit their single author.
+  - Co-authored skills credit all authors jointly.
+
+The README contains a summary table, but the AUTHORS file inside each
+skill folder is the authoritative record and travels with the skill if
+the folder is copied or redistributed on its own.
+
+------------------------------------------------------------------------
+OPTIONAL: PROSE LICENSING
+------------------------------------------------------------------------
+
+The substantive content of a skill is written guidance (prose), which is
+closer to documentation than to code. If the project chooses to make
+written content reusable under a content license while keeping code under
+Apache 2.0, the dual-license is:
+
+  - Code, scripts, and configuration: Apache License 2.0
+  - Written guidance (SKILL.md prose, reference docs): CC-BY-4.0
+
+Under CC-BY-4.0, reuse of the written content requires attribution to the
+named authors of the relevant skill. This dual-license is OPTIONAL and
+only applies if explicitly adopted; absent that, the entire repository is
+Apache 2.0.
