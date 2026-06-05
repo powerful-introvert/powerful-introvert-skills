@@ -1,6 +1,6 @@
 # Powerful Introvert — Skills for Introverted Technology Leaders
 
-A collection of [Claude Skills](https://docs.claude.com) for engineering managers, product managers, and individual contributors who want to lead and influence completely draining their social battery.
+A collection of [Claude Skills](https://docs.claude.com) for engineering managers, product managers, and individual contributors who want to lead and influence without emptying their social battery.
 
 Each skill is a self-contained scaffold for a high-leverage move that introverted leaders tend to know they should make — and skip. The goal isn't to make you act like an extrovert. It's to lower the activation energy on the right move and hand you something concrete: the right message, agenda, action plan.
 
