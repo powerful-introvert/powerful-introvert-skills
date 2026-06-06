@@ -40,6 +40,11 @@ for dir in "$REPO_ROOT"/*/; do
         skill_errors=$((skill_errors + 1))
     fi
 
+    if [ -f "$REPO_ROOT/README.md" ] && ! grep -q "\`$slug\`" "$REPO_ROOT/README.md"; then
+        echo "  ✗ $slug: not found in README.md skills table"
+        skill_errors=$((skill_errors + 1))
+    fi
+
     if [ "$skill_errors" -eq 0 ]; then
         echo "  ✓ $slug"
     fi

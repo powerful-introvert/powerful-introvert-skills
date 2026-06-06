@@ -75,6 +75,20 @@ EOF
 assert "missing description: in frontmatter fails" 1 bash "$SCRIPT" "$TMPDIR"
 rm -rf "$TMPDIR"
 
+# Test: skill slug not in README fails
+make_fixture
+mkdir -p "$TMPDIR/unlisted-skill"
+cat > "$TMPDIR/unlisted-skill/SKILL.md" <<'EOF'
+---
+name: unlisted-skill
+description: A skill missing from the README table
+---
+Content.
+EOF
+echo "Greg Weinger <greg@example.com>" > "$TMPDIR/unlisted-skill/AUTHORS"
+assert "skill not in README fails" 1 bash "$SCRIPT" "$TMPDIR"
+rm -rf "$TMPDIR"
+
 echo ""
 echo "Results: $PASS passed, $FAIL failed"
 [ "$FAIL" -eq 0 ]
