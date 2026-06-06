@@ -53,6 +53,28 @@ mkdir -p "$TMPDIR/not-a-skill"
 assert "folder without SKILL.md is ignored" 0 bash "$SCRIPT" "$TMPDIR"
 rm -rf "$TMPDIR"
 
+# Test: SKILL.md missing name: fails
+make_fixture
+cat > "$TMPDIR/valid-skill/SKILL.md" <<'EOF'
+---
+description: A skill without a name
+---
+Content.
+EOF
+assert "missing name: in frontmatter fails" 1 bash "$SCRIPT" "$TMPDIR"
+rm -rf "$TMPDIR"
+
+# Test: SKILL.md missing description: fails
+make_fixture
+cat > "$TMPDIR/valid-skill/SKILL.md" <<'EOF'
+---
+name: valid-skill
+---
+Content.
+EOF
+assert "missing description: in frontmatter fails" 1 bash "$SCRIPT" "$TMPDIR"
+rm -rf "$TMPDIR"
+
 echo ""
 echo "Results: $PASS passed, $FAIL failed"
 [ "$FAIL" -eq 0 ]

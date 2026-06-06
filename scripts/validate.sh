@@ -4,6 +4,21 @@ set -uo pipefail
 REPO_ROOT="${1:-.}"
 ERRORS=0
 
+has_frontmatter_key() {
+    local file="$1" key="$2"
+    awk -v key="$key" '
+        BEGIN { in_frontmatter=0; found=0 }
+        /^---/ {
+            in_frontmatter = (in_frontmatter == 0 ? 1 : 0)
+            next
+        }
+        in_frontmatter && $0 ~ "^" key ":" {
+            found = 1
+        }
+        END { exit (found ? 0 : 1) }
+    ' "$file"
+}
+
 for dir in "$REPO_ROOT"/*/; do
     [ -d "$dir" ] || continue
     [ -f "$dir/SKILL.md" ] || continue
@@ -12,6 +27,16 @@ for dir in "$REPO_ROOT"/*/; do
 
     if [ ! -f "$dir/AUTHORS" ]; then
         echo "  ✗ $slug: missing AUTHORS"
+        skill_errors=$((skill_errors + 1))
+    fi
+
+    if ! has_frontmatter_key "$dir/SKILL.md" "name"; then
+        echo "  ✗ $slug: SKILL.md missing 'name:' in frontmatter"
+        skill_errors=$((skill_errors + 1))
+    fi
+
+    if ! has_frontmatter_key "$dir/SKILL.md" "description"; then
+        echo "  ✗ $slug: SKILL.md missing 'description:' in frontmatter"
         skill_errors=$((skill_errors + 1))
     fi
 
