@@ -6,17 +6,7 @@ ERRORS=0
 
 has_frontmatter_key() {
     local file="$1" key="$2"
-    awk -v key="$key" '
-        BEGIN { in_frontmatter=0; found=0 }
-        /^---/ {
-            in_frontmatter = (in_frontmatter == 0 ? 1 : 0)
-            next
-        }
-        in_frontmatter && $0 ~ "^" key ":" {
-            found = 1
-        }
-        END { exit (found ? 0 : 1) }
-    ' "$file"
+    awk 'BEGIN{found=0;matched=0} /^---/{found++; next} found==1 && index($0, "'"$key"':") == 1{matched=1} END{exit (matched ? 0 : 1)}' "$file"
 }
 
 for dir in "$REPO_ROOT"/*/; do
@@ -40,7 +30,10 @@ for dir in "$REPO_ROOT"/*/; do
         skill_errors=$((skill_errors + 1))
     fi
 
-    if [ -f "$REPO_ROOT/README.md" ] && ! grep -q "\`$slug\`" "$REPO_ROOT/README.md"; then
+    if [ ! -f "$REPO_ROOT/README.md" ]; then
+        echo "  ✗ $slug: README.md not found (cannot check slug)"
+        skill_errors=$((skill_errors + 1))
+    elif ! grep -q "\`$slug\`" "$REPO_ROOT/README.md"; then
         echo "  ✗ $slug: not found in README.md skills table"
         skill_errors=$((skill_errors + 1))
     fi

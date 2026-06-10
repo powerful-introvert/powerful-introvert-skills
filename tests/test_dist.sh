@@ -2,6 +2,10 @@
 set -uo pipefail
 DIST="$(cd "$(dirname "$0")/.." && pwd)/scripts/dist.sh"
 PASS=0; FAIL=0
+FIXTURE=""
+
+cleanup() { [ -n "$FIXTURE" ] && rm -rf "$FIXTURE"; }
+trap cleanup EXIT
 
 assert() {
     local desc="$1" expected="$2"
@@ -18,40 +22,40 @@ assert() {
 }
 
 make_fixture() {
-    TMPDIR=$(mktemp -d)
-    cat > "$TMPDIR/README.md" <<'EOF'
+    FIXTURE=$(mktemp -d)
+    cat > "$FIXTURE/README.md" <<'EOF'
 | Skill | What |
 |---|---|
 | `sample-skill` | A sample skill |
 EOF
-    mkdir -p "$TMPDIR/sample-skill"
-    cat > "$TMPDIR/sample-skill/SKILL.md" <<'EOF'
+    mkdir -p "$FIXTURE/sample-skill"
+    cat > "$FIXTURE/sample-skill/SKILL.md" <<'EOF'
 ---
 name: sample-skill
 description: A sample skill for dist testing
 ---
 Content.
 EOF
-    echo "Greg Weinger <greg@example.com>" > "$TMPDIR/sample-skill/AUTHORS"
+    echo "Greg Weinger <greg@example.com>" > "$FIXTURE/sample-skill/AUTHORS"
 }
 
 # Test: creates .skill file
 make_fixture
-bash "$DIST" "$TMPDIR"
-assert "dist creates .skill file" 0 test -f "$TMPDIR/dist/sample-skill.skill"
-rm -rf "$TMPDIR"
+bash "$DIST" "$FIXTURE" >/dev/null 2>&1
+assert "dist creates .skill file" 0 test -f "$FIXTURE/dist/sample-skill.skill"
+rm -rf "$FIXTURE"; FIXTURE=""
 
 # Test: .skill is a valid zip
 make_fixture
-bash "$DIST" "$TMPDIR"
-assert ".skill is a valid zip" 0 unzip -t "$TMPDIR/dist/sample-skill.skill"
-rm -rf "$TMPDIR"
+bash "$DIST" "$FIXTURE" >/dev/null 2>&1
+assert ".skill is a valid zip" 0 unzip -t "$FIXTURE/dist/sample-skill.skill"
+rm -rf "$FIXTURE"; FIXTURE=""
 
 # Test: zip contains SKILL.md
 make_fixture
-bash "$DIST" "$TMPDIR"
-assert "zip contains SKILL.md" 0 bash -c "unzip -Z1 '$TMPDIR/dist/sample-skill.skill' | grep -q 'SKILL.md'"
-rm -rf "$TMPDIR"
+bash "$DIST" "$FIXTURE" >/dev/null 2>&1
+assert "zip contains SKILL.md" 0 bash -c "unzip -Z1 '$FIXTURE/dist/sample-skill.skill' | grep -q 'SKILL.md'"
+rm -rf "$FIXTURE"; FIXTURE=""
 
 echo ""
 echo "Results: $PASS passed, $FAIL failed"

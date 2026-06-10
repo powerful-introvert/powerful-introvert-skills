@@ -2,6 +2,10 @@
 set -uo pipefail
 SCRIPT="$(cd "$(dirname "$0")/.." && pwd)/scripts/validate.sh"
 PASS=0; FAIL=0
+FIXTURE=""
+
+cleanup() { [ -n "$FIXTURE" ] && rm -rf "$FIXTURE"; }
+trap cleanup EXIT
 
 assert() {
     local desc="$1" expected="$2"
@@ -19,75 +23,81 @@ assert() {
 }
 
 make_fixture() {
-    TMPDIR=$(mktemp -d)
-    cat > "$TMPDIR/README.md" <<'EOF'
+    FIXTURE=$(mktemp -d)
+    cat > "$FIXTURE/README.md" <<'EOF'
 | Skill | What |
 |---|---|
 | `valid-skill` | A valid skill |
 EOF
-    mkdir -p "$TMPDIR/valid-skill"
-    cat > "$TMPDIR/valid-skill/SKILL.md" <<'EOF'
+    mkdir -p "$FIXTURE/valid-skill"
+    cat > "$FIXTURE/valid-skill/SKILL.md" <<'EOF'
 ---
 name: valid-skill
 description: A valid skill for testing
 ---
 Content here.
 EOF
-    echo "Greg Weinger <greg@example.com>" > "$TMPDIR/valid-skill/AUTHORS"
+    echo "Greg Weinger <greg@example.com>" > "$FIXTURE/valid-skill/AUTHORS"
 }
 
 # Test: valid skill passes
 make_fixture
-assert "valid skill passes" 0 bash "$SCRIPT" "$TMPDIR"
-rm -rf "$TMPDIR"
+assert "valid skill passes" 0 bash "$SCRIPT" "$FIXTURE"
+rm -rf "$FIXTURE"; FIXTURE=""
 
 # Test: missing AUTHORS fails
 make_fixture
-rm "$TMPDIR/valid-skill/AUTHORS"
-assert "missing AUTHORS fails" 1 bash "$SCRIPT" "$TMPDIR"
-rm -rf "$TMPDIR"
+rm "$FIXTURE/valid-skill/AUTHORS"
+assert "missing AUTHORS fails" 1 bash "$SCRIPT" "$FIXTURE"
+rm -rf "$FIXTURE"; FIXTURE=""
 
 # Test: folder without SKILL.md is not treated as a skill
 make_fixture
-mkdir -p "$TMPDIR/not-a-skill"
-assert "folder without SKILL.md is ignored" 0 bash "$SCRIPT" "$TMPDIR"
-rm -rf "$TMPDIR"
+mkdir -p "$FIXTURE/not-a-skill"
+assert "folder without SKILL.md is ignored" 0 bash "$SCRIPT" "$FIXTURE"
+rm -rf "$FIXTURE"; FIXTURE=""
 
 # Test: SKILL.md missing name: fails
 make_fixture
-cat > "$TMPDIR/valid-skill/SKILL.md" <<'EOF'
+cat > "$FIXTURE/valid-skill/SKILL.md" <<'EOF'
 ---
 description: A skill without a name
 ---
 Content.
 EOF
-assert "missing name: in frontmatter fails" 1 bash "$SCRIPT" "$TMPDIR"
-rm -rf "$TMPDIR"
+assert "missing name: in frontmatter fails" 1 bash "$SCRIPT" "$FIXTURE"
+rm -rf "$FIXTURE"; FIXTURE=""
 
 # Test: SKILL.md missing description: fails
 make_fixture
-cat > "$TMPDIR/valid-skill/SKILL.md" <<'EOF'
+cat > "$FIXTURE/valid-skill/SKILL.md" <<'EOF'
 ---
 name: valid-skill
 ---
 Content.
 EOF
-assert "missing description: in frontmatter fails" 1 bash "$SCRIPT" "$TMPDIR"
-rm -rf "$TMPDIR"
+assert "missing description: in frontmatter fails" 1 bash "$SCRIPT" "$FIXTURE"
+rm -rf "$FIXTURE"; FIXTURE=""
 
 # Test: skill slug not in README fails
 make_fixture
-mkdir -p "$TMPDIR/unlisted-skill"
-cat > "$TMPDIR/unlisted-skill/SKILL.md" <<'EOF'
+mkdir -p "$FIXTURE/unlisted-skill"
+cat > "$FIXTURE/unlisted-skill/SKILL.md" <<'EOF'
 ---
 name: unlisted-skill
 description: A skill missing from the README table
 ---
 Content.
 EOF
-echo "Greg Weinger <greg@example.com>" > "$TMPDIR/unlisted-skill/AUTHORS"
-assert "skill not in README fails" 1 bash "$SCRIPT" "$TMPDIR"
-rm -rf "$TMPDIR"
+echo "Greg Weinger <greg@example.com>" > "$FIXTURE/unlisted-skill/AUTHORS"
+assert "skill not in README fails" 1 bash "$SCRIPT" "$FIXTURE"
+rm -rf "$FIXTURE"; FIXTURE=""
+
+# Test: dist/ directory is not treated as a skill
+make_fixture
+mkdir -p "$FIXTURE/dist"
+assert "dist/ is not treated as a skill" 0 bash "$SCRIPT" "$FIXTURE"
+rm -rf "$FIXTURE"; FIXTURE=""
 
 echo ""
 echo "Results: $PASS passed, $FAIL failed"
