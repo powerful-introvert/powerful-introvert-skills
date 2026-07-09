@@ -94,7 +94,7 @@ This runs as an explicit up-front pass over the whole stakeholder list before th
 
 ## Influence Model
 
-**Default: Cohen & Bradford currencies of influence** (inspiration, task-related, position, relationship, personal). Used specifically in Mode 1's "what do they respond to" question — the skill prompts with currency categories if the leader's initial answer is vague.
+**Leader preference first, Cohen & Bradford as fallback.** Mode 0 asks the leader what influence-building material they're already familiar with. If they name something they already use (their own consulting model, RACI-first thinking, whatever), the skill builds recommendations on that instead of imposing a fixed framework — this is what Ryan's priming interview is actually designed to surface, not a formality. Only when the leader has no stated preference does the skill fall back to **Cohen & Bradford currencies of influence** (inspiration, task-related, position, relationship, personal) as the baseline, used in Mode 1's "what do they respond to" question — the skill prompts with currency categories if the leader's initial answer is vague.
 
 **Power/interest grid** frames Mode 2's stakeholder mapping (who decides, who blocks, who's a swing vote, who's an ally).
 
@@ -121,5 +121,5 @@ An EM pushing a platform-migration proposal that needs sign-off from a VP of Pro
 
 ## Open Items Outside This Spec
 
-- Ryan should sign off on Cohen & Bradford as the default influence model before this ships, given the notes originally deferred that call to his consulting experience.
+- Ryan should sign off on Cohen & Bradford as the no-preference fallback before this ships, given the notes originally deferred that call to his consulting experience.
 - The exact markdown templates for each file type (`file-formats.md`) are implementation detail for the plan, not this design.
