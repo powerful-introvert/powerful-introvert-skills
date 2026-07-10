@@ -14,7 +14,7 @@ The campaign engine. Entry point depends on whether the campaign already has a f
 
 1. If the user's message names the initiative, read that campaign's file directly. If it's ambiguous and more than one `campaigns/*.md` file exists, list the open campaigns and ask which one applies — don't guess.
 2. Read the campaign file plus every relevant `people/*.md` file.
-3. Run Mode 1's checklist pass (`references/rapport-mapping.md`) over the stakeholders in scope — existing-file people just get the "anything changed" check.
+3. Run Mode 1's checklist pass (`references/rapport-mapping.md`), scoped to whichever stakeholders the user's message names or clearly implicates (e.g. "I had a call with Mark" → just Mark) — existing-file people just get the "anything changed" check. Fall back to the full stakeholder roster only if the user asks for a full status sweep or doesn't name anyone specific.
 4. Ask: "Anything new happened — email, meeting, conversation — since last time?" Treat the answer as a pivot point against the existing plan, not a fresh start.
 
 ## Recommending a move

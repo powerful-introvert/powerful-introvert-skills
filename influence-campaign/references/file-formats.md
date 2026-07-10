@@ -29,7 +29,7 @@ Written once by Mode 0 (`leader-priming.md`). Never regenerated — only read by
 
 ## `people/<slug>.md`
 
-One file per stakeholder, shared across all campaigns. `<slug>` is the person's name, lowercased, spaces replaced with `-` (e.g. `jane-vp-product.md`).
+One file per stakeholder, shared across all campaigns. `<slug>` is the person's name, lowercased, spaces replaced with `-` (e.g. `jane-doe.md`).
 
 ```markdown
 # Jane Doe — VP of Product

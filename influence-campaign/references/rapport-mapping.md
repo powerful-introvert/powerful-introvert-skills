@@ -1,6 +1,6 @@
 # Mode 1: Rapport Mapping
 
-Runs as an up-front checklist pass at the start or resumption of every campaign, over **every** stakeholder in that campaign's scope — not just newly-discovered people. Invoked by Mode 2 (`references/influence-building.md`), not triggered directly by `SKILL.md`.
+Runs as a checklist pass whenever a campaign starts or resumes, invoked by Mode 2 (`references/influence-building.md`), not triggered directly by `SKILL.md`. For a new campaign, this covers every stakeholder in scope. For a resuming campaign, Mode 2 determines the scope — see `references/influence-building.md`'s "Resuming a campaign" step for how that's narrowed.
 
 For each stakeholder in scope, check `<notes-root>/people/<slug>.md`:
 
