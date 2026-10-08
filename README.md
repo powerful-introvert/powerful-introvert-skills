@@ -14,8 +14,6 @@ These skills come out of [*The Introverted Leader*](https://gweinger.com) podcas
 |---|---|---|
 | [`influence-campaign`](./influence-campaign/) | Plan and run an influence campaign for an initiative: map stakeholders, read what each responds to, sequence outreach, draft the messages. Remembers the people you work with across campaigns. | Greg Weinger & Ryan Latta |
 
-**Coming next:** feedback on a meeting from its transcript, prep for a difficult conversation, a pre-meeting ritual, and a survival plan for offsites and conferences. Watch or star the repo to hear when they land.
-
 > **Attribution model:** authorship is declared per skill, not per repo. A solo skill credits its author; a co-authored skill credits everyone. The credit lives in the skill's folder (`AUTHORS` and the `SKILL.md`), so it travels with the skill if someone copies just that folder.
 
 ---
