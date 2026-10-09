@@ -39,7 +39,7 @@ Skills are not Claude-specific in concept, but these are written and tested agai
 
 ## Want help putting this into practice?
 
-Doing great work and still getting passed over? Going quiet in the meetings that decide your reputation? [Answer six quick questions](QUESTIONNAIRE_URL) — if I think I can help, I'll reach out personally. — Greg
+Doing great work and still getting passed over? Going quiet in the meetings that decide your reputation? [Answer six quick questions](https://gweinger.com/questionnaire/?utm_source=github&utm_medium=readme&utm_campaign=skills&utm_content=questionnaire) — if I think I can help, I'll reach out personally. — Greg
 
 ---
 
