@@ -13,14 +13,8 @@ These skills come out of the [Powerful Introvert](https://gweinger.com) podcast 
 | Skill | What it does | Authors |
 |---|---|---|
 | `influence-campaign` | Plan and run an influence campaign for an initiative: map stakeholders, read what each responds to, sequence outreach, draft the messages. | Greg Weinger & Ryan Latta |
-| `meeting-analysis` | Feedback on a meeting from its transcript — did you talk too much/little, did your point land, what's the follow-up. | Greg Weinger |
-| `difficult-conversations` | Prep for confrontation, hard feedback, or pushing back on a peer. Classify the situation, clarify your goal, rehearse. | Greg Weinger |
-| `meeting-prep` | Pre-game ritual: goals, likely objections, the points you must land, who's in the room and what they care about. | Greg Weinger |
-| `big-room-survival` | Prep checklist for surviving multi-day, high-stimulation events — conferences, offsites, big-room planning. | Greg Weinger |
 
 > **Attribution model:** authorship is declared per skill, not per repo. A solo skill credits its author; a co-authored skill credits everyone. The credit lives in the skill's folder (`AUTHORS` and the `SKILL.md`), so it travels with the skill if someone copies just that folder.
-
-_(Table is illustrative — keep it current as skills land. Not every row exists yet.)_
 
 ---
 

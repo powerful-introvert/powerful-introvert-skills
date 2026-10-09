@@ -49,17 +49,13 @@ When adding a new skill:
 2. Update the skills table in `README.md`.
 3. Run `make validate` to confirm the skill passes all checks.
 
-## Skills Planned / In Progress
-
-From `README.md` (not all folders exist yet):
+## Skills
 
 | Slug | Purpose |
 |---|---|
 | `influence-campaign` | Stakeholder map, outreach sequencing, message drafts |
-| `meeting-analysis` | Post-meeting feedback from transcript |
-| `difficult-conversations` | Prep for confrontation, hard feedback, pushback |
-| `meeting-prep` | Pre-game: goals, objections, who's in the room |
-| `big-room-survival` | Surviving multi-day high-stimulation events |
+
+Only skills meant to be public belong here. Planned skills are not listed until they ship.
 
 ## Style Guidance (from CONTRIBUTING.md)
 
